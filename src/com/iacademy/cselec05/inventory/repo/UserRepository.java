@@ -6,4 +6,6 @@ public interface UserRepository {
 
     // Used for login (finding the username and password of the user in the database)
     User findByCredentials(String username, String password);
+
+    boolean registerUser(User user);
 }

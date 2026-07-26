@@ -26,7 +26,7 @@ public class AuthUtility {
     // Checks the logged-in user's specific role
     public static boolean hasRole(String role, HttpServletRequest request) {
         User user = getUser(request);
-        return user != null && user.getRole().equals(role);
+        return user != null && role.equals(user.getRole());
     }
 
     public static void invalidateSession(HttpServletRequest request){

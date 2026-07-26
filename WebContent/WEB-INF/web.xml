@@ -5,18 +5,73 @@
 
          version="3.1">
 
+    <!--  Uses login.jsp as the index/landing page  -->
     <welcome-file-list>
         <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
-    
+
+    <!--  Authentication Filter  -->
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>com.iacademy.cselec05.inventory.filter.AuthenticationFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--  Authorization Filter  -->
+    <filter>
+        <filter-name>AuthorizationFilter</filter-name>
+        <filter-class>com.iacademy.cselec05.inventory.filter.AuthorizationFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AuthorizationFilter</filter-name>
+        <url-pattern>/register</url-pattern>
+    </filter-mapping>
+
+    <!--  Servlets  -->
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.iacademy.cselec05.inventory.servlet.LoginServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.iacademy.cselec05.inventory.servlet.LogoutServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>com.iacademy.cselec05.inventory.servlet.HomeServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>RegisterUserServlet</servlet-name>
+        <servlet-class>com.iacademy.cselec05.inventory.servlet.RegisterUserServlet</servlet-class>
+    </servlet>
+
+    <!--  Servlet Mapping  -->
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>RegisterUserServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    
 </web-app>

@@ -39,4 +39,26 @@ public class UserJdbcRepository implements UserRepository {
 
         return null;
     }
+
+    @Override
+    public boolean registerUser(User user) {
+
+        String sql = "INSERT INTO user (username, password, role) VALUES (?,?,?)";
+
+        try(Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getPassword());
+            ps.setString(3, user.getRole());
+
+            // Determine whether a row (new user account) has been successfully inserted in the database
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }

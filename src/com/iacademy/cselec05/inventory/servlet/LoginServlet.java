@@ -14,14 +14,14 @@ import java.io.IOException;
 
 public class LoginServlet extends HttpServlet {
 
-    private UserRepository userRepository = ObjectFactory.getUserRepository();
+    private final UserRepository userRepository = ObjectFactory.getUserRepository();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         // Redirects authenticated users to the home page instead of showing the login page
         if(AuthUtility.isAuthenticated(req)) {
-            resp.sendRedirect(req.getContextPath() + "/");
+            resp.sendRedirect(req.getContextPath() + "/home");
             return;
         }
 
@@ -52,7 +52,7 @@ public class LoginServlet extends HttpServlet {
         // If authentication succeeds, create a session for the user and redirect to the home page
        if(user != null) {
            AuthUtility.setSession(user, req);
-           resp.sendRedirect(req.getContextPath() + "/");
+           resp.sendRedirect(req.getContextPath() + "/home");
        } else {
            req.setAttribute("error", "Invalid Username or Password");
            req.getRequestDispatcher("/login.jsp").forward(req, resp);

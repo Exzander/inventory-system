@@ -10,7 +10,7 @@
 <body>
     <h3>Login</h3>
 
-    <form action="${pageContext.request.contextPath}/login.jsp" method="post">
+    <form action="${pageContext.request.contextPath}/login" method="post">
         <label>Username</label><br>
         <input type="text" name="username"><br><br>
 
