@@ -14,26 +14,21 @@ import java.io.IOException;
 import java.util.List;
 
 public class CreateItemServlet extends HttpServlet {
-
     private final ItemRepository itemRepository = ObjectFactory.getItemRepository();
     private final RoomRepository roomRepository = ObjectFactory.getRoomRepository();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         // Retrieves all available rooms for the dropdown
         List<Room> rooms = roomRepository.findAll();
         req.setAttribute("rooms", rooms);
 
         req.getRequestDispatcher(Views.CREATE_ITEM).forward(req, resp);
-
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String quantityStr = req.getParameter("quantity");
         String roomIdStr = req.getParameter("roomId");
@@ -52,7 +47,7 @@ public class CreateItemServlet extends HttpServlet {
         req.setAttribute("rooms", rooms);
 
         if (name == null || name.isEmpty()) {
-            req.setAttribute("itemError", "Item name is required.");
+            req.setAttribute("nameError", "Item name is required.");
             req.getRequestDispatcher(Views.CREATE_ITEM).forward(req, resp);
             return;
         }
@@ -63,13 +58,12 @@ public class CreateItemServlet extends HttpServlet {
             quantity = Integer.parseInt(quantityStr);
 
             if (quantity < 0) {
-                req.setAttribute("itemError", "Quantity cannot be negative.");
+                req.setAttribute("quantityError", "Quantity cannot be negative.");
                 req.getRequestDispatcher(Views.CREATE_ITEM).forward(req, resp);
                 return;
             }
-
         } catch (NumberFormatException e) {
-            req.setAttribute("itemError", "Invalid quantity.");
+            req.setAttribute("quantityError", "Invalid quantity.");
             req.getRequestDispatcher(Views.CREATE_ITEM).forward(req, resp);
             return;
         }
@@ -80,6 +74,7 @@ public class CreateItemServlet extends HttpServlet {
             try {
                 roomId = Integer.parseInt(roomIdStr);
             } catch (NumberFormatException ignored) {
+                // Ignore invalid room IDs and leave the item unassigned to any room.
             }
         }
 
