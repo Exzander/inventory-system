@@ -5,25 +5,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Room</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/room/edit-room.css">
 </head>
 <body>
 
-<h2>Edit Room</h2>
+<div class="container">
+    <h2>Edit Room</h2>
 
-<c:if test="${not empty roomError}">
-    <p style="color: red;">${roomError}</p>
-</c:if>
+    <form action="${pageContext.request.contextPath}/edit-room" method="post">
+        <input type="hidden" name="id" value="${room.id}">
 
-<form action="${pageContext.request.contextPath}/edit-room" method="post">
+        <div class="form-group">
+            <label for="roomName">Room Name</label>
+            <input type="text" id="roomName" name="roomName" value="${room.roomName}">
 
-    <input type="hidden" name="id" value="${room.id}" />
+            <c:if test="${not empty roomError}">
+                <div class="field-error">
+                        ${roomError}
+                </div>
+            </c:if>
 
-    <label for="roomName">Room Name:</label><br>
-    <input type="text" id="roomName" name="roomName" value="${room.roomName}" required /><br><br>
+        </div>
 
-    <button type="submit">Update Room</button>
-    <a href="${pageContext.request.contextPath}/room-list">Cancel</a>
-</form>
+        <div class="actions">
+            <button type="submit">Update Room</button>
+            <a class="cancel-btn" href="${pageContext.request.contextPath}/room-list">Cancel</a>
+        </div>
+
+    </form>
+</div>
 
 </body>
 </html>

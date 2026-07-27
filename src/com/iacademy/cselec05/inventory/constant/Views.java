@@ -19,7 +19,7 @@ public class Views {
     // Room Views
     public static final String ROOM_LIST = "/WEB-INF/views/room/room-list.jsp";
     public static final String CREATE_ROOM = "/WEB-INF/views/room/create-room.jsp";
-    public static final String EDIT_ROOM = "WEB/INF/views/room/edit-room.jsp";
+    public static final String EDIT_ROOM = "/WEB-INF/views/room/edit-room.jsp";
 
     private Views() {
         // Prevent object creation
