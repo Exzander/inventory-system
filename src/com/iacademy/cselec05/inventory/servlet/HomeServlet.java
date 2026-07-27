@@ -20,6 +20,5 @@ public class HomeServlet extends HttpServlet {
 
         // Forward request to protected dashboard view inside WEB-INF
         req.getRequestDispatcher(Views.HOME).forward(req, resp);
-
     }
 }

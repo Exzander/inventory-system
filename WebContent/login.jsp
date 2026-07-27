@@ -5,20 +5,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory System Login</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
 </head>
 <body>
-    <h3>Login</h3>
 
-    <form action="${pageContext.request.contextPath}/login" method="post">
-        <label>Username</label><br>
-        <input type="text" name="username"><br><br>
+    <div class="login-container">
+        <h1>Login</h1>
 
-        <label>Password</label><br>
-        <input type="password" name="password"><br><br>
+        <!-- Invalid credentials -->
+        <c:if test="${not empty error}">
+            <div class="error-message">
+                <c:out value="${error}"/>
+            </div>
+        </c:if>
 
-        <input type="submit" value="Login">
-    </form>
+        <form action="${pageContext.request.contextPath}/login" method="post">
+            <div class="form-container">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" value="<c:out value='${username}'/>">
+
+                <c:if test="${not empty usernameError}">
+                    <p class="error">
+                        <c:out value="${usernameError}"/>
+                    </p>
+                </c:if>
+            </div>
+
+            <div class="form-container">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password">
+
+                <c:if test="${not empty passwordError}">
+                    <p class="error">
+                        <c:out value="${passwordError}"/>
+                    </p>
+                </c:if>
+            </div>
+
+            <div class="submit-button">
+                <input type="submit" value="Login">
+            </div>
+
+        </form>
+    </div>
 
 </body>
 </html>

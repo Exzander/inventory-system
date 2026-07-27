@@ -15,12 +15,10 @@ import java.io.IOException;
 
 
 public class LoginServlet extends HttpServlet {
-
     private final UserRepository userRepository = ObjectFactory.getUserRepository();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         // Redirects authenticated users to the home page instead of showing the login page
         if(AuthUtility.isAuthenticated(req)) {
             resp.sendRedirect(req.getContextPath() + Urls.HOME);
@@ -29,22 +27,26 @@ public class LoginServlet extends HttpServlet {
         }
 
         req.getRequestDispatcher(Views.LOGIN).forward(req, resp);
-
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-       if(username == null || username.trim().isEmpty()) {
+        if(username != null) {
+            username = username.trim();
+        }
+
+        req.setAttribute("username", username);
+
+       if(username == null || username.isEmpty()) {
            req.setAttribute("usernameError", "Username is required");
            req.getRequestDispatcher(Views.LOGIN).forward(req, resp);
            return;
        }
 
-       if(password == null || password.trim().isEmpty()) {
+       if(password == null || password.isEmpty()) {
            req.setAttribute("passwordError", "Password is required");
            req.getRequestDispatcher(Views.LOGIN).forward(req, resp);
            return;
