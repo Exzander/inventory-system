@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Item</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/create-item.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/item/create-item.css">
 </head>
 <body>
 

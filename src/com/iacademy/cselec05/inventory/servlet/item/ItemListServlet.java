@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class ItemListServlet extends HttpServlet {
-
     private final ItemRepository itemRepository = ObjectFactory.getItemRepository();
 
     @Override

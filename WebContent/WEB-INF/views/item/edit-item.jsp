@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Item</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/edit-item.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/item/edit-item.css">
 </head>
 <body>
 
