@@ -5,76 +5,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Manage Item Stock</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/item/manage-stock.css">
 </head>
 <body>
 
-<h2>Manage Item Stock</h2>
+    <div class="container">
+        <h2>Manage Item Stock</h2>
 
-<c:if test="${not empty itemError}">
-    <p style="color:red;">
-            ${itemError}
-    </p>
-</c:if>
+        <c:if test="${not empty itemError}">
+            <div class="error">
+                    ${itemError}
+            </div>
+        </c:if>
 
-<c:if test="${not empty item}">
+        <c:if test="${not empty item}">
 
-    <form action="${pageContext.request.contextPath}/manage-stock" method="post">
+            <form action="${pageContext.request.contextPath}/manage-stock" method="post">
+                <input type="hidden" name="id" value="${item.id}">
 
-        <input type="hidden" name="id" value="${item.id}">
+                <div class="info-box">
+                    <p><strong>Item:</strong> ${item.name}</p>
+                    <p><strong>Current Quantity:</strong> ${item.quantity}</p>
+                </div>
 
-        <p>
-            <strong>Item:</strong>
-                ${item.name}
-        </p>
+                <div class="form-group">
+                    <label>Operation</label>
 
-        <p>
-            <strong>Current Quantity:</strong>
-                ${item.quantity}
-        </p>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="operation" value="ADD" <c:if test="${empty operation || operation eq 'ADD'}">checked</c:if>>
+                            Add
+                        </label>
 
-        <label>Operation:</label><br>
+                        <label>
+                            <input type="radio" name="operation" value="SUBTRACT" <c:if test="${operation eq 'SUBTRACT'}">checked</c:if>>
+                            Subtract
+                        </label>
+                    </div>
+                </div>
 
-        <input
-                type="radio"
-                id="add"
-                name="operation"
-                value="ADD"
-                checked>
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
 
-        <label for="add">Add</label>
+                    <input type="number" id="quantity" name="quantity" min="1" value="${quantity}">
 
-        <input
-                type="radio"
-                id="subtract"
-                name="operation"
-                value="SUBTRACT">
+                    <c:if test="${not empty quantityError}">
+                        <div class="field-error">
+                                ${quantityError}
+                        </div>
+                    </c:if>
+                </div>
 
-        <label for="subtract">Subtract</label>
-
-        <br><br>
-
-        <label for="amount">Amount:</label><br>
-
-        <input
-                type="number"
-                id="amount"
-                name="amount"
-                min="1"
-                required>
-
-        <br><br>
-
-        <button type="submit">
-            Update Quantity
-        </button>
-
-        <a href="${pageContext.request.contextPath}/item-list">
-            Cancel
-        </a>
-
-    </form>
-
-</c:if>
+                <div class="actions">
+                    <button type="submit">Update Quantity</button>
+                    <a class="cancel-btn" href="${pageContext.request.contextPath}/item-list">Cancel</a>
+                </div>
+            </form>
+        </c:if>
+    </div>
 
 </body>
 </html>
