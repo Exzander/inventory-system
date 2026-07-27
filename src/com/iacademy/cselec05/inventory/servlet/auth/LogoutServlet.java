@@ -1,5 +1,6 @@
-package com.iacademy.cselec05.inventory.servlet;
+package com.iacademy.cselec05.inventory.servlet.auth;
 
+import com.iacademy.cselec05.inventory.constant.Urls;
 import com.iacademy.cselec05.inventory.util.AuthUtility;
 
 import javax.servlet.ServletException;
@@ -17,6 +18,6 @@ public class LogoutServlet extends HttpServlet {
             AuthUtility.invalidateSession(req);
         }
 
-        resp.sendRedirect(req.getContextPath() + "/login");
+        resp.sendRedirect(req.getContextPath() + Urls.LOGIN);
     }
 }

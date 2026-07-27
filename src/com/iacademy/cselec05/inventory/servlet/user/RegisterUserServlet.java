@@ -1,5 +1,6 @@
-package com.iacademy.cselec05.inventory.servlet;
+package com.iacademy.cselec05.inventory.servlet.user;
 
+import com.iacademy.cselec05.inventory.constant.Views;
 import com.iacademy.cselec05.inventory.factory.ObjectFactory;
 import com.iacademy.cselec05.inventory.model.User;
 import com.iacademy.cselec05.inventory.repo.UserRepository;
@@ -18,7 +19,7 @@ public class RegisterUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         // Sends authorized users to the registration page
-        req.getRequestDispatcher("/WEB-INF/views/register-user.jsp").forward(req, resp);
+        req.getRequestDispatcher(Views.REGISTER_USER).forward(req, resp);
     }
 
     @Override
@@ -34,19 +35,19 @@ public class RegisterUserServlet extends HttpServlet {
 
         if(username == null || username.trim().isEmpty()) {
             req.setAttribute("usernameError", "Username is required");
-            req.getRequestDispatcher("/WEB-INF/views/register-user.jsp").forward(req, resp);
+            req.getRequestDispatcher(Views.REGISTER_USER).forward(req, resp);
             return;
         }
 
         if(password == null || password.trim().isEmpty()) {
             req.setAttribute("passwordError", "Password is required");
-            req.getRequestDispatcher("/WEB-INF/views/register-user.jsp").forward(req, resp);
+            req.getRequestDispatcher(Views.REGISTER_USER).forward(req, resp);
             return;
         }
 
         if(role == null || role.trim().isEmpty()) {
             req.setAttribute("roleError", "Role is required");
-            req.getRequestDispatcher("/WEB-INF/views/register-user.jsp").forward(req, resp);
+            req.getRequestDispatcher(Views.REGISTER_USER).forward(req, resp);
             return;
         }
 
@@ -67,6 +68,6 @@ public class RegisterUserServlet extends HttpServlet {
             req.setAttribute("registrationError", "Failed to register User");
         }
 
-        req.getRequestDispatcher("/WEB-INF/views/register-user.jsp").forward(req, resp);
+        req.getRequestDispatcher(Views.REGISTER_USER).forward(req, resp);
     }
 }

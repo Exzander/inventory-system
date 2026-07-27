@@ -1,6 +1,7 @@
 package com.iacademy.cselec05.inventory.servlet;
 
 import com.iacademy.cselec05.inventory.model.User;
+import com.iacademy.cselec05.inventory.constant.Views;
 import com.iacademy.cselec05.inventory.util.AuthUtility;
 
 import javax.servlet.ServletException;
@@ -18,6 +19,7 @@ public class HomeServlet extends HttpServlet {
         req.setAttribute("currentUser", currentUser);
 
         // Forward request to protected dashboard view inside WEB-INF
-        req.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(req, resp);
+        req.getRequestDispatcher(Views.HOME).forward(req, resp);
+
     }
 }

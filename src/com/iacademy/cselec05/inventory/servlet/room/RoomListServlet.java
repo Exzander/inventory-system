@@ -1,5 +1,6 @@
-package com.iacademy.cselec05.inventory.servlet;
+package com.iacademy.cselec05.inventory.servlet.room;
 
+import com.iacademy.cselec05.inventory.constant.Views;
 import com.iacademy.cselec05.inventory.factory.ObjectFactory;
 import com.iacademy.cselec05.inventory.model.Room;
 import com.iacademy.cselec05.inventory.repo.RoomRepository;
@@ -21,6 +22,7 @@ public class RoomListServlet extends HttpServlet {
 
         req.setAttribute("rooms", rooms);
 
-        req.getRequestDispatcher("/WEB-INF/views/room-list.jsp").forward(req, resp);
+        req.getRequestDispatcher(Views.ROOM_LIST).forward(req, resp);
+
     }
 }

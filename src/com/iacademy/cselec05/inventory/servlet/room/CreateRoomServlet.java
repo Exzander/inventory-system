@@ -1,5 +1,7 @@
-package com.iacademy.cselec05.inventory.servlet;
+package com.iacademy.cselec05.inventory.servlet.room;
 
+import com.iacademy.cselec05.inventory.constant.Urls;
+import com.iacademy.cselec05.inventory.constant.Views;
 import com.iacademy.cselec05.inventory.factory.ObjectFactory;
 import com.iacademy.cselec05.inventory.model.Room;
 import com.iacademy.cselec05.inventory.repo.RoomRepository;
@@ -16,7 +18,7 @@ public class CreateRoomServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/create-room.jsp").forward(req, resp);
+        req.getRequestDispatcher(Views.CREATE_ROOM).forward(req, resp);
     }
 
     @Override
@@ -33,7 +35,7 @@ public class CreateRoomServlet extends HttpServlet {
 
         if(roomName == null || roomName.isEmpty()) {
             req.setAttribute("roomError", "Room name is required");
-            req.getRequestDispatcher("/WEB-INF/views/create-room.jsp").forward(req, resp);
+            req.getRequestDispatcher(Views.CREATE_ROOM).forward(req, resp);
             return;
         }
 
@@ -43,10 +45,10 @@ public class CreateRoomServlet extends HttpServlet {
         boolean success = roomRepository.createRoom(room);
 
         if(success) {
-            resp.sendRedirect(req.getContextPath() + "/room-list");
+            resp.sendRedirect(req.getContextPath() + Urls.ROOM_LIST);
         } else {
             req.setAttribute("roomError", "Failed to create room");
-            req.getRequestDispatcher("/WEB-INF/views/create-room.jsp").forward(req, resp);
+            req.getRequestDispatcher(Views.CREATE_ROOM).forward(req, resp);
         }
     }
 }

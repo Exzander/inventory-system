@@ -1,5 +1,7 @@
-package com.iacademy.cselec05.inventory.servlet;
+package com.iacademy.cselec05.inventory.servlet.auth;
 
+import com.iacademy.cselec05.inventory.constant.Urls;
+import com.iacademy.cselec05.inventory.constant.Views;
 import com.iacademy.cselec05.inventory.factory.ObjectFactory;
 import com.iacademy.cselec05.inventory.repo.UserRepository;
 import com.iacademy.cselec05.inventory.model.User;
@@ -21,11 +23,13 @@ public class LoginServlet extends HttpServlet {
 
         // Redirects authenticated users to the home page instead of showing the login page
         if(AuthUtility.isAuthenticated(req)) {
-            resp.sendRedirect(req.getContextPath() + "/home");
+            resp.sendRedirect(req.getContextPath() + Urls.HOME);
+
             return;
         }
 
-        req.getRequestDispatcher("/login.jsp").forward(req, resp);
+        req.getRequestDispatcher(Views.LOGIN).forward(req, resp);
+
     }
 
     @Override
@@ -36,13 +40,13 @@ public class LoginServlet extends HttpServlet {
 
        if(username == null || username.trim().isEmpty()) {
            req.setAttribute("usernameError", "Username is required");
-           req.getRequestDispatcher("/login.jsp").forward(req, resp);
+           req.getRequestDispatcher(Views.LOGIN).forward(req, resp);
            return;
        }
 
        if(password == null || password.trim().isEmpty()) {
            req.setAttribute("passwordError", "Password is required");
-           req.getRequestDispatcher("/login.jsp").forward(req, resp);
+           req.getRequestDispatcher(Views.LOGIN).forward(req, resp);
            return;
        }
 
@@ -52,10 +56,10 @@ public class LoginServlet extends HttpServlet {
         // If authentication succeeds, create a session for the user and redirect to the home page
        if(user != null) {
            AuthUtility.setSession(user, req);
-           resp.sendRedirect(req.getContextPath() + "/home");
+           resp.sendRedirect(req.getContextPath() + Urls.HOME);
        } else {
            req.setAttribute("error", "Invalid username or password");
-           req.getRequestDispatcher("/login.jsp").forward(req, resp);
+           req.getRequestDispatcher(Views.LOGIN).forward(req, resp);
        }
 
     }

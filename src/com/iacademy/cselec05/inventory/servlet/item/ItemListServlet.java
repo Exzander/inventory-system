@@ -1,5 +1,6 @@
-package com.iacademy.cselec05.inventory.servlet;
+package com.iacademy.cselec05.inventory.servlet.item;
 
+import com.iacademy.cselec05.inventory.constant.Views;
 import com.iacademy.cselec05.inventory.factory.ObjectFactory;
 import com.iacademy.cselec05.inventory.model.Item;
 import com.iacademy.cselec05.inventory.repo.ItemRepository;
@@ -26,6 +27,6 @@ public class ItemListServlet extends HttpServlet {
         req.setAttribute("items", items);
 
         // Forward to the Item List view
-        req.getRequestDispatcher("/WEB-INF/views/item-list.jsp").forward(req, resp);
+        req.getRequestDispatcher(Views.ITEM_LIST).forward(req, resp);
     }
 }

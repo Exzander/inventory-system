@@ -1,5 +1,7 @@
-package com.iacademy.cselec05.inventory.servlet;
+package com.iacademy.cselec05.inventory.servlet.item;
 
+import com.iacademy.cselec05.inventory.constant.Urls;
+import com.iacademy.cselec05.inventory.constant.Views;
 import com.iacademy.cselec05.inventory.factory.ObjectFactory;
 import com.iacademy.cselec05.inventory.model.Item;
 import com.iacademy.cselec05.inventory.model.Room;
@@ -23,7 +25,7 @@ public class EditItemServlet extends HttpServlet {
         String idStr = req.getParameter("id");
 
         if (idStr == null || idStr.trim().isEmpty()) {
-            resp.sendRedirect(req.getContextPath() + "/item-list");
+            resp.sendRedirect(req.getContextPath() + Urls.ITEM_LIST);
             return;
         }
 
@@ -45,7 +47,7 @@ public class EditItemServlet extends HttpServlet {
             req.setAttribute("itemError", "Invalid Item ID.");
         }
 
-        req.getRequestDispatcher("/WEB-INF/views/edit-item.jsp").forward(req, resp);
+        req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
     }
 
     @Override
@@ -68,7 +70,7 @@ public class EditItemServlet extends HttpServlet {
 
             if (idStr == null || idStr.trim().isEmpty()) {
                 req.setAttribute("itemError", "Invalid Item ID.");
-                req.getRequestDispatcher("/WEB-INF/views/edit-item.jsp").forward(req, resp);
+                req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
                 return;
             }
 
@@ -82,7 +84,7 @@ public class EditItemServlet extends HttpServlet {
 
                 req.setAttribute("item", item);
                 req.setAttribute("itemError", "Item name is required.");
-                req.getRequestDispatcher("/WEB-INF/views/edit-item.jsp").forward(req, resp);
+                req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
                 return;
             }
 
@@ -103,7 +105,7 @@ public class EditItemServlet extends HttpServlet {
 
                 req.setAttribute("item", item);
                 req.setAttribute("itemError", "Invalid quantity.");
-                req.getRequestDispatcher("/WEB-INF/views/edit-item.jsp").forward(req, resp);
+                req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
                 return;
             }
 
@@ -118,16 +120,16 @@ public class EditItemServlet extends HttpServlet {
             boolean success = itemRepository.updateItem(item);
 
             if (success) {
-                resp.sendRedirect(req.getContextPath() + "/item-list");
+                resp.sendRedirect(req.getContextPath() + Urls.ITEM_LIST);
             } else {
                 req.setAttribute("item", item);
                 req.setAttribute("itemError", "Failed to update item.");
-                req.getRequestDispatcher("/WEB-INF/views/edit-item.jsp").forward(req, resp);
+                req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
             }
 
         } catch (NumberFormatException e) {
             req.setAttribute("itemError", "Invalid Item ID.");
-            req.getRequestDispatcher("/WEB-INF/views/edit-item.jsp").forward(req, resp);
+            req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
         }
     }
 }

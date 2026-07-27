@@ -1,5 +1,7 @@
-package com.iacademy.cselec05.inventory.servlet;
+package com.iacademy.cselec05.inventory.servlet.room;
 
+import com.iacademy.cselec05.inventory.constant.Urls;
+import com.iacademy.cselec05.inventory.constant.Views;
 import com.iacademy.cselec05.inventory.factory.ObjectFactory;
 import com.iacademy.cselec05.inventory.model.Room;
 import com.iacademy.cselec05.inventory.repo.RoomRepository;
@@ -19,7 +21,7 @@ public class EditRoomServlet extends HttpServlet {
         String idStr = req.getParameter("id");
 
         if(idStr == null || idStr.trim().isEmpty()) {
-            resp.sendRedirect(req.getContextPath() + "/room-list");
+            resp.sendRedirect(req.getContextPath() + Urls.ROOM_LIST);
             return;
         }
 
@@ -37,7 +39,7 @@ public class EditRoomServlet extends HttpServlet {
             req.setAttribute("roomError", "Invalid Room ID");
         }
 
-        req.getRequestDispatcher("/WEB-INF/views/edit-room.jsp").forward(req, resp);
+        req.getRequestDispatcher(Views.EDIT_ROOM).forward(req, resp);
     }
 
     @Override
@@ -52,7 +54,7 @@ public class EditRoomServlet extends HttpServlet {
         try {
             if(idParam == null || idParam.trim().isEmpty()) {
                 req.setAttribute("roomError", "Invalid Room ID.");
-                req.getRequestDispatcher("/WEB-INF/views/edit-room.jsp").forward(req, resp);
+                req.getRequestDispatcher(Views.EDIT_ROOM).forward(req, resp);
                 return;
             }
 
@@ -65,7 +67,7 @@ public class EditRoomServlet extends HttpServlet {
 
                 req.setAttribute("roomError", "Room name is required.");
                 req.setAttribute("room", room);
-                req.getRequestDispatcher("/WEB-INF/views/edit-room.jsp").forward(req, resp);
+                req.getRequestDispatcher(Views.EDIT_ROOM).forward(req, resp);
                 return;
             }
 
@@ -76,16 +78,15 @@ public class EditRoomServlet extends HttpServlet {
             boolean success = roomRepository.updateRoom(room);
 
             if (success) {
-                resp.sendRedirect(req.getContextPath() + "/room-list");
+                resp.sendRedirect(req.getContextPath() + Urls.ROOM_LIST);
             } else {
                 req.setAttribute("roomError", "Failed to update room.");
                 req.setAttribute("room", room);
-                req.getRequestDispatcher("/WEB-INF/views/edit-room.jsp").forward(req, resp);
+                req.getRequestDispatcher(Views.EDIT_ROOM).forward(req, resp);
             }
-
         } catch (NumberFormatException e) {
             req.setAttribute("roomError", "Invalid Room ID.");
-            req.getRequestDispatcher("/WEB-INF/views/edit-room.jsp").forward(req, resp);
+            req.getRequestDispatcher(Views.EDIT_ROOM).forward(req, resp);
         }
     }
 }

@@ -1,5 +1,7 @@
-package com.iacademy.cselec05.inventory.servlet;
+package com.iacademy.cselec05.inventory.servlet.item;
 
+import com.iacademy.cselec05.inventory.constant.Urls;
+import com.iacademy.cselec05.inventory.constant.Views;
 import com.iacademy.cselec05.inventory.factory.ObjectFactory;
 import com.iacademy.cselec05.inventory.model.Item;
 import com.iacademy.cselec05.inventory.model.Room;
@@ -24,7 +26,8 @@ public class CreateItemServlet extends HttpServlet {
         List<Room> rooms = roomRepository.findAll();
         req.setAttribute("rooms", rooms);
 
-        req.getRequestDispatcher("/WEB-INF/views/create-item.jsp").forward(req, resp);
+        req.getRequestDispatcher(Views.CREATE_ITEM).forward(req, resp);
+
     }
 
     @Override
@@ -50,7 +53,7 @@ public class CreateItemServlet extends HttpServlet {
 
         if (name == null || name.isEmpty()) {
             req.setAttribute("itemError", "Item name is required.");
-            req.getRequestDispatcher("/WEB-INF/views/create-item.jsp").forward(req, resp);
+            req.getRequestDispatcher(Views.CREATE_ITEM).forward(req, resp);
             return;
         }
 
@@ -61,13 +64,13 @@ public class CreateItemServlet extends HttpServlet {
 
             if (quantity < 0) {
                 req.setAttribute("itemError", "Quantity cannot be negative.");
-                req.getRequestDispatcher("/WEB-INF/views/create-item.jsp").forward(req, resp);
+                req.getRequestDispatcher(Views.CREATE_ITEM).forward(req, resp);
                 return;
             }
 
         } catch (NumberFormatException e) {
             req.setAttribute("itemError", "Invalid quantity.");
-            req.getRequestDispatcher("/WEB-INF/views/create-item.jsp").forward(req, resp);
+            req.getRequestDispatcher(Views.CREATE_ITEM).forward(req, resp);
             return;
         }
 
@@ -85,10 +88,10 @@ public class CreateItemServlet extends HttpServlet {
         boolean success = itemRepository.createItem(item);
 
         if (success) {
-            resp.sendRedirect(req.getContextPath() + "/item-list");
+            resp.sendRedirect(req.getContextPath() + Urls.ITEM_LIST);
         } else {
             req.setAttribute("itemError", "Failed to create item.");
-            req.getRequestDispatcher("/WEB-INF/views/create-item.jsp").forward(req, resp);
+            req.getRequestDispatcher(Views.CREATE_ITEM).forward(req, resp);
         }
     }
 }
