@@ -47,7 +47,7 @@ public class CreateItemServlet extends HttpServlet {
         req.setAttribute("rooms", rooms);
 
         if (name == null || name.isEmpty()) {
-            req.setAttribute("nameError", "Item name is required.");
+            req.setAttribute("nameError", "Item name is required");
             req.getRequestDispatcher(Views.CREATE_ITEM).forward(req, resp);
             return;
         }
@@ -58,12 +58,12 @@ public class CreateItemServlet extends HttpServlet {
             quantity = Integer.parseInt(quantityStr);
 
             if (quantity < 0) {
-                req.setAttribute("quantityError", "Quantity cannot be negative.");
+                req.setAttribute("quantityError", "Quantity cannot be negative");
                 req.getRequestDispatcher(Views.CREATE_ITEM).forward(req, resp);
                 return;
             }
         } catch (NumberFormatException e) {
-            req.setAttribute("quantityError", "Invalid quantity.");
+            req.setAttribute("quantityError", "Invalid quantity");
             req.getRequestDispatcher(Views.CREATE_ITEM).forward(req, resp);
             return;
         }

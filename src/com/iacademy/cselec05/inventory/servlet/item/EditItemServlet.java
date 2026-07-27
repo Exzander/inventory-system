@@ -64,7 +64,7 @@ public class EditItemServlet extends HttpServlet {
 
 
         if (idStr == null || idStr.trim().isEmpty()) {
-            req.setAttribute("itemError", "Invalid Item ID.");
+            req.setAttribute("itemError", "Invalid item ID");
             req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
             return;
         }
@@ -74,7 +74,7 @@ public class EditItemServlet extends HttpServlet {
         try {
             id = Integer.parseInt(idStr);
         } catch (NumberFormatException e) {
-            req.setAttribute("itemError", "Invalid Item ID.");
+            req.setAttribute("itemError", "Invalid item ID");
             req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
             return;
         }
@@ -91,7 +91,7 @@ public class EditItemServlet extends HttpServlet {
                 roomId = Integer.parseInt(roomIdStr);
             } catch (NumberFormatException e) {
                 req.setAttribute("item", item);
-                req.setAttribute("roomError", "Invalid room selected.");
+                req.setAttribute("roomError", "Invalid room selected");
                 req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
                 return;
             }
@@ -101,7 +101,7 @@ public class EditItemServlet extends HttpServlet {
 
         if (name == null || name.isEmpty()) {
             req.setAttribute("item", item);
-            req.setAttribute("nameError", "Item name is required.");
+            req.setAttribute("nameError", "Item name is required");
             req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
             return;
         }
@@ -113,14 +113,14 @@ public class EditItemServlet extends HttpServlet {
 
             if (quantity < 0) {
                 req.setAttribute("item", item);
-                req.setAttribute("quantityError", "Quantity cannot be negative.");
+                req.setAttribute("quantityError", "Quantity cannot be negative");
                 req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
                 return;
             }
 
         } catch (NumberFormatException e) {
             req.setAttribute("item", item);
-            req.setAttribute("quantityError", "Invalid quantity.");
+            req.setAttribute("quantityError", "Invalid quantity");
             req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
             return;
         }
@@ -133,7 +133,7 @@ public class EditItemServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + Urls.ITEM_LIST);
         } else {
             req.setAttribute("item", item);
-            req.setAttribute("itemError", "Failed to update item.");
+            req.setAttribute("itemError", "Failed to update item");
             req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
         }
     }

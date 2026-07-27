@@ -56,7 +56,7 @@ public class ManageStockServlet extends HttpServlet {
             Item item = itemRepository.findById(itemId);
 
             req.setAttribute("item", item);
-            req.setAttribute("quantityError", "Quantity is required.");
+            req.setAttribute("quantityError", "Quantity is required");
 
             req.getRequestDispatcher(Views.MANAGE_STOCK).forward(req, resp);
             return;
@@ -76,7 +76,7 @@ public class ManageStockServlet extends HttpServlet {
             req.setAttribute("item", item);
 
             if (quantity <= 0) {
-                req.setAttribute("quantityError", "Quantity must be greater than zero.");
+                req.setAttribute("quantityError", "Quantity must be greater than zero");
                 req.getRequestDispatcher(Views.MANAGE_STOCK).forward(req, resp);
                 return;
             }
@@ -88,13 +88,13 @@ public class ManageStockServlet extends HttpServlet {
                 newQuantity = currentQuantity + quantity;
             } else if ("SUBTRACT".equalsIgnoreCase(operation)) {
                 if (quantity > currentQuantity) {
-                    req.setAttribute("itemError", "Cannot subtract more than the current stock.");
+                    req.setAttribute("itemError", "Cannot subtract more than the current stock");
                     req.getRequestDispatcher(Views.MANAGE_STOCK).forward(req, resp);
                     return;
                 }
                 newQuantity = currentQuantity - quantity;
             } else {
-                req.setAttribute("itemError", "Invalid operation.");
+                req.setAttribute("itemError", "Invalid operation");
                 req.getRequestDispatcher(Views.MANAGE_STOCK).forward(req, resp);
                 return;
             }
@@ -104,7 +104,7 @@ public class ManageStockServlet extends HttpServlet {
             if (success) {
                 resp.sendRedirect(req.getContextPath() + Urls.ITEM_LIST);
             } else {
-                req.setAttribute("itemError", "Failed to update quantity.");
+                req.setAttribute("itemError", "Failed to update quantity");
                 req.getRequestDispatcher(Views.MANAGE_STOCK).forward(req, resp);
             }
 

@@ -36,7 +36,7 @@ public class EditRoomServlet extends HttpServlet {
                 req.setAttribute("room", room);
             }
         } catch (NumberFormatException e) {
-            req.setAttribute("roomError", "Invalid Room ID");
+            req.setAttribute("roomError", "Invalid room ID");
         }
 
         req.getRequestDispatcher(Views.EDIT_ROOM).forward(req, resp);
@@ -53,7 +53,7 @@ public class EditRoomServlet extends HttpServlet {
 
         try {
             if(idParam == null || idParam.trim().isEmpty()) {
-                req.setAttribute("roomError", "Invalid Room ID.");
+                req.setAttribute("roomError", "Invalid room ID");
                 req.getRequestDispatcher(Views.EDIT_ROOM).forward(req, resp);
                 return;
             }
@@ -65,7 +65,7 @@ public class EditRoomServlet extends HttpServlet {
                 room.setId(id);
                 room.setRoomName(roomName);
 
-                req.setAttribute("roomError", "Room name is required.");
+                req.setAttribute("roomError", "Room name is required");
                 req.setAttribute("room", room);
                 req.getRequestDispatcher(Views.EDIT_ROOM).forward(req, resp);
                 return;
@@ -80,7 +80,7 @@ public class EditRoomServlet extends HttpServlet {
             if (success) {
                 resp.sendRedirect(req.getContextPath() + Urls.ROOM_LIST);
             } else {
-                req.setAttribute("roomError", "Failed to update room.");
+                req.setAttribute("roomError", "Failed to update room");
                 req.setAttribute("room", room);
                 req.getRequestDispatcher(Views.EDIT_ROOM).forward(req, resp);
             }
