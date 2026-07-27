@@ -85,7 +85,7 @@ public class CreateItemServlet extends HttpServlet {
         if (success) {
             resp.sendRedirect(req.getContextPath() + Urls.ITEM_LIST);
         } else {
-            req.setAttribute("itemError", "Failed to create item.");
+            req.setAttribute("itemError", "Failed to create item");
             req.getRequestDispatcher(Views.CREATE_ITEM).forward(req, resp);
         }
     }

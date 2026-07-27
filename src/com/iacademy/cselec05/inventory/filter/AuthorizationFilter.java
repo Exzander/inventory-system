@@ -1,5 +1,6 @@
 package com.iacademy.cselec05.inventory.filter;
 
+import com.iacademy.cselec05.inventory.constant.Urls;
 import com.iacademy.cselec05.inventory.model.User;
 import com.iacademy.cselec05.inventory.util.AuthUtility;
 
@@ -22,14 +23,14 @@ public class AuthorizationFilter implements Filter {
 
         // Defensive check (AuthenticationFilter should already handle this)
         if (currentUser == null) {
-            resp.sendRedirect(req.getContextPath() + "/login");
+            resp.sendRedirect(req.getContextPath() + Urls.LOGIN);
             return;
         }
 
         if("ADMIN".equalsIgnoreCase(currentUser.getRole())) {
             filterChain.doFilter(req, resp);
         } else {
-            resp.sendRedirect(req.getContextPath() + "/home");
+            resp.sendRedirect(req.getContextPath() + Urls.HOME);
         }
     }
 

@@ -33,7 +33,7 @@
                     <tr>
                         <td class="empty-message"
                             colspan="${currentUser.role == 'ADMIN' ? 3 : 2}">
-                            No rooms found.
+                            No rooms found
                         </td>
                     </tr>
                 </c:when>

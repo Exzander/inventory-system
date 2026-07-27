@@ -33,7 +33,7 @@
             <c:choose>
                 <c:when test="${empty items}">
                     <tr>
-                        <td class="empty-message" colspan="${currentUser.role == 'ADMIN' || currentUser.role == 'CLERK' ? 5 : 4}">No items found.</td>
+                        <td class="empty-message" colspan="${currentUser.role == 'ADMIN' || currentUser.role == 'CLERK' ? 5 : 4}">No items found</td>
                     </tr>
                 </c:when>
 

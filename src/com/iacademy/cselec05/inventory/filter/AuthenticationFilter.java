@@ -1,5 +1,7 @@
 package com.iacademy.cselec05.inventory.filter;
 
+import com.iacademy.cselec05.inventory.constant.Urls;
+import com.iacademy.cselec05.inventory.constant.Views;
 import com.iacademy.cselec05.inventory.util.AuthUtility;
 
 import javax.servlet.*;
@@ -21,7 +23,7 @@ public class AuthenticationFilter implements Filter {
         String path = req.getRequestURI().substring(req.getContextPath().length());
 
         // Identifies public paths
-        boolean isLoginPath = path.equals("/login") || path.equals("/login.jsp");
+        boolean isLoginPath = path.equals(Urls.LOGIN) || path.equals(Views.LOGIN);
         boolean isStaticResource = path.startsWith("/css");
 
         boolean isLoggedIn = AuthUtility.isAuthenticated(req);
@@ -30,7 +32,7 @@ public class AuthenticationFilter implements Filter {
         if(isLoggedIn || isLoginPath || isStaticResource) {
             filterChain.doFilter(req, resp);
         } else { // If all are false, deny the request and redirect them to the login page
-            resp.sendRedirect(req.getContextPath() + "/login");
+            resp.sendRedirect(req.getContextPath() + Urls.LOGIN);
         }
     }
 

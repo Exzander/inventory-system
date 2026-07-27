@@ -84,7 +84,7 @@ public class EditRoomServlet extends HttpServlet {
                 req.getRequestDispatcher(Views.EDIT_ROOM).forward(req, resp);
             }
         } catch (NumberFormatException e) {
-            req.setAttribute("roomError", "Invalid Room ID.");
+            req.setAttribute("roomError", "Invalid room ID");
             req.getRequestDispatcher(Views.EDIT_ROOM).forward(req, resp);
         }
     }
