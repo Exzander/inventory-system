@@ -18,11 +18,15 @@ public class RoomListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        // Retrieves all rooms
         List<Room> rooms = roomRepository.findAll();
 
+        // Makes the list available to the JSP
         req.setAttribute("rooms", rooms);
 
-        req.getRequestDispatcher(Views.ROOM_LIST).forward(req, resp);
 
+        // Forward to the Room List view
+        req.getRequestDispatcher(Views.ROOM_LIST).forward(req, resp);
     }
 }
