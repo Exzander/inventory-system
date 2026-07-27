@@ -17,8 +17,7 @@ public class ItemListServlet extends HttpServlet {
     private final ItemRepository itemRepository = ObjectFactory.getItemRepository();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         // Retrieves all items
         List<Item> items = itemRepository.findAll();

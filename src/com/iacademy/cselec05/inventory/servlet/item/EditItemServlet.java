@@ -14,14 +14,11 @@ import java.io.IOException;
 import java.util.List;
 
 public class EditItemServlet extends HttpServlet {
-
     private final ItemRepository itemRepository = ObjectFactory.getItemRepository();
     private final RoomRepository roomRepository = ObjectFactory.getRoomRepository();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idStr = req.getParameter("id");
 
         if (idStr == null || idStr.trim().isEmpty()) {
@@ -33,27 +30,25 @@ public class EditItemServlet extends HttpServlet {
             int id = Integer.parseInt(idStr);
 
             Item item = itemRepository.findById(id);
-            List<Room> rooms = roomRepository.findAll();
-
-            req.setAttribute("rooms", rooms);
 
             if (item == null) {
-                req.setAttribute("itemError", "Item not found.");
-            } else {
-                req.setAttribute("item", item);
+                resp.sendRedirect(req.getContextPath() + Urls.ITEM_LIST);
+                return;
             }
 
-        } catch (NumberFormatException e) {
-            req.setAttribute("itemError", "Invalid Item ID.");
-        }
+            List<Room> rooms = roomRepository.findAll();
 
-        req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
+            req.setAttribute("item", item);
+            req.setAttribute("rooms", rooms);
+
+            req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
+        } catch (NumberFormatException e) {
+            resp.sendRedirect(req.getContextPath() + Urls.ITEM_LIST);
+        }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idStr = req.getParameter("id");
         String name = req.getParameter("name");
         String quantityStr = req.getParameter("quantity");
@@ -63,72 +58,82 @@ public class EditItemServlet extends HttpServlet {
             name = name.trim();
         }
 
+        // Reload rooms for the dropdown
         List<Room> rooms = roomRepository.findAll();
         req.setAttribute("rooms", rooms);
 
+
+        if (idStr == null || idStr.trim().isEmpty()) {
+            req.setAttribute("itemError", "Invalid Item ID.");
+            req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
+            return;
+        }
+
+        int id;
+
         try {
+            id = Integer.parseInt(idStr);
+        } catch (NumberFormatException e) {
+            req.setAttribute("itemError", "Invalid Item ID.");
+            req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
+            return;
+        }
 
-            if (idStr == null || idStr.trim().isEmpty()) {
-                req.setAttribute("itemError", "Invalid Item ID.");
-                req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
-                return;
-            }
+        // Item object used to retain entered values when validation fails
+        Item item = new Item();
+        item.setId(id);
+        item.setName(name);
 
-            int id = Integer.parseInt(idStr);
+        Integer roomId = null;
 
-            if (name == null || name.isEmpty()) {
-
-                Item item = new Item();
-                item.setId(id);
-                item.setName(name);
-
-                req.setAttribute("item", item);
-                req.setAttribute("itemError", "Item name is required.");
-                req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
-                return;
-            }
-
-            int quantity;
-
+        if (roomIdStr != null && !roomIdStr.trim().isEmpty()) {
             try {
-                quantity = Integer.parseInt(quantityStr);
-
-                if (quantity < 0) {
-                    throw new NumberFormatException();
-                }
-
+                roomId = Integer.parseInt(roomIdStr);
             } catch (NumberFormatException e) {
-
-                Item item = new Item();
-                item.setId(id);
-                item.setName(name);
-
                 req.setAttribute("item", item);
-                req.setAttribute("itemError", "Invalid quantity.");
+                req.setAttribute("roomError", "Invalid room selected.");
                 req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
                 return;
             }
+        }
 
-            Integer roomId = null;
+        item.setRoomId(roomId);
 
-            if (roomIdStr != null && !roomIdStr.trim().isEmpty()) {
-                roomId = Integer.parseInt(roomIdStr);
-            }
+        if (name == null || name.isEmpty()) {
+            req.setAttribute("item", item);
+            req.setAttribute("nameError", "Item name is required.");
+            req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
+            return;
+        }
 
-            Item item = new Item(id, name, quantity, roomId);
+        int quantity;
 
-            boolean success = itemRepository.updateItem(item);
+        try {
+            quantity = Integer.parseInt(quantityStr);
 
-            if (success) {
-                resp.sendRedirect(req.getContextPath() + Urls.ITEM_LIST);
-            } else {
+            if (quantity < 0) {
                 req.setAttribute("item", item);
-                req.setAttribute("itemError", "Failed to update item.");
+                req.setAttribute("quantityError", "Quantity cannot be negative.");
                 req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
+                return;
             }
 
         } catch (NumberFormatException e) {
-            req.setAttribute("itemError", "Invalid Item ID.");
+            req.setAttribute("item", item);
+            req.setAttribute("quantityError", "Invalid quantity.");
+            req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
+            return;
+        }
+
+        item.setQuantity(quantity);
+
+        boolean success = itemRepository.updateItem(item);
+
+        if (success) {
+            resp.sendRedirect(req.getContextPath() + Urls.ITEM_LIST);
+        } else {
+            req.setAttribute("item", item);
+            req.setAttribute("itemError", "Failed to update item.");
             req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
         }
     }

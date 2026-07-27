@@ -15,8 +15,7 @@ public class ManageStockServlet extends HttpServlet {
     private final ItemRepository itemRepository = ObjectFactory.getItemRepository();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String idParam = req.getParameter("id");
 
@@ -46,8 +45,7 @@ public class ManageStockServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String idParam = req.getParameter("id");
         String operation = req.getParameter("operation");

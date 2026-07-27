@@ -5,73 +5,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Item</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/edit-item.css">
 </head>
 <body>
 
-<h2>Edit Item</h2>
+    <div class="container">
+        <h2>Edit Item</h2>
 
-<c:if test="${not empty itemError}">
-    <p style="color:red;">${itemError}</p>
-</c:if>
+        <c:if test="${not empty itemError}">
+            <div class="general-error">
+                    ${itemError}
+            </div>
+        </c:if>
 
-<c:if test="${not empty item}">
+        <c:if test="${not empty item}">
+            <form action="${pageContext.request.contextPath}/edit-item" method="post">
+                <input type="hidden" name="id" value="${item.id}">
 
-    <form action="${pageContext.request.contextPath}/edit-item" method="post">
+                <div class="form-group">
+                    <label for="name">Item Name</label>
+                    <input type="text" id="name" name="name" value="${item.name}">
 
-        <input
-                type="hidden"
-                name="id"
-                value="${item.id}">
+                    <c:if test="${not empty nameError}">
+                        <div class="error">${nameError}</div>
+                    </c:if>
+                </div>
 
-        <label for="name">Item Name:</label><br>
-        <input
-                type="text"
-                id="name"
-                name="name"
-                value="${item.name}">
-        <br><br>
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" name="quantity" min="0" value="${item.quantity}">
 
-        <label for="quantity">Quantity:</label><br>
-        <input
-                type="number"
-                id="quantity"
-                name="quantity"
-                min="0"
-                value="${item.quantity}">
-        <br><br>
+                    <c:if test="${not empty quantityError}">
+                        <div class="error">${quantityError}</div>
+                    </c:if>
+                </div>
 
-        <label for="roomId">Assigned Room:</label><br>
+                <div class="form-group">
+                    <label for="roomId">Assigned Room</label>
 
-        <select id="roomId" name="roomId">
+                    <select id="roomId" name="roomId">
+                        <option value="">-- Unassigned --</option>
 
-            <option value="">-- Unassigned --</option>
+                        <c:forEach var="room" items="${rooms}">
+                            <option value="${room.id}" <c:if test="${room.id == item.roomId}">selected</c:if>>${room.roomName}</option>
+                        </c:forEach>
+                    </select>
 
-            <c:forEach var="room" items="${rooms}">
+                    <c:if test="${not empty roomError}">
+                        <div class="error">${roomError}</div>
+                    </c:if>
+                </div>
 
-                <option value="${room.id}"
-                        <c:if test="${room.id == item.roomId}">
-                            selected
-                        </c:if>>
-                        ${room.roomName}
-                </option>
-
-            </c:forEach>
-
-        </select>
-
-        <br><br>
-
-        <button type="submit">
-            Update Item
-        </button>
-
-        <a href="${pageContext.request.contextPath}/item-list">
-            Cancel
-        </a>
-
-    </form>
-
-</c:if>
+                <div class="actions">
+                    <button type="submit">Update Item</button>
+                    <a class="cancel-btn" href="${pageContext.request.contextPath}/item-list">Cancel</a>
+                </div>
+            </form>
+        </c:if>
+    </div>
 
 </body>
 </html>

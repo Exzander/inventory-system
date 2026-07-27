@@ -5,7 +5,6 @@ import com.iacademy.cselec05.inventory.model.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 public class AuthUtility {
-
     private static final String USER_KEY = "currentUser";
 
     public static void setSession(User user, HttpServletRequest request){
