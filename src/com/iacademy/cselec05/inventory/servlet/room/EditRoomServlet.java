@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class EditRoomServlet extends HttpServlet {
-
     private final RoomRepository roomRepository = ObjectFactory.getRoomRepository();
 
     @Override

@@ -9,7 +9,6 @@
 </head>
 <body>
 
-
     <div class="container">
         <div class="top-bar">
             <h2>Manage Rooms</h2>
@@ -17,7 +16,6 @@
             <c:if test="${currentUser.role == 'ADMIN'}">
                 <a class="button" href="${pageContext.request.contextPath}/create-room">Add New Room</a>
             </c:if>
-
         </div>
 
         <table>
@@ -28,7 +26,6 @@
                 <c:if test="${currentUser.role == 'ADMIN'}">
                     <th>Action</th>
                 </c:if>
-
             </tr>
 
             <c:choose>
@@ -50,11 +47,9 @@
 
                             <c:if test="${currentUser.role == 'ADMIN'}">
                                 <td>
-                                    <a class="action-link" href="${pageContext.request.contextPath}/edit-room?id=${room.id}">Edit
-                                    </a>
+                                    <a class="action-link" href="${pageContext.request.contextPath}/edit-room?id=${room.id}">Edit</a>
                                 </td>
                             </c:if>
-
                         </tr>
                     </c:forEach>
                 </c:otherwise>
@@ -64,6 +59,7 @@
         <div class="back">
             <a href="${pageContext.request.contextPath}/home">Back to Home</a>
         </div>
+
     </div>
 
 </body>

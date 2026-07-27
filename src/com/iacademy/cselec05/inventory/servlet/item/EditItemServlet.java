@@ -28,7 +28,6 @@ public class EditItemServlet extends HttpServlet {
 
         try {
             int id = Integer.parseInt(idStr);
-
             Item item = itemRepository.findById(id);
 
             if (item == null) {
@@ -61,7 +60,6 @@ public class EditItemServlet extends HttpServlet {
         // Reload rooms for the dropdown
         List<Room> rooms = roomRepository.findAll();
         req.setAttribute("rooms", rooms);
-
 
         if (idStr == null || idStr.trim().isEmpty()) {
             req.setAttribute("itemError", "Invalid item ID");
@@ -117,7 +115,6 @@ public class EditItemServlet extends HttpServlet {
                 req.getRequestDispatcher(Views.EDIT_ITEM).forward(req, resp);
                 return;
             }
-
         } catch (NumberFormatException e) {
             req.setAttribute("item", item);
             req.setAttribute("quantityError", "Invalid quantity");

@@ -2,10 +2,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
     background-color: #f4f6f9;
     display: flex;
     justify-content: center;
@@ -16,8 +16,8 @@ body {
 
 .container {
     width: 100%;
-    max-width: 450px;
-    background: #ffffff;
+    max-width: 420px;
+    background: white;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -29,6 +29,26 @@ h2 {
     margin-bottom: 25px;
 }
 
+.message-error {
+    background-color: #fdecea;
+    color: #d32f2f;
+    border: 1px solid #f5c2c7;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
 .form-group {
     margin-bottom: 18px;
 }
@@ -36,8 +56,8 @@ h2 {
 label {
     display: block;
     font-weight: bold;
-    margin-bottom: 6px;
     color: #444;
+    margin-bottom: 6px;
 }
 
 input,
@@ -55,7 +75,7 @@ select:focus {
     border-color: #2563eb;
 }
 
-.error {
+.field-error {
     color: #d32f2f;
     font-size: 13px;
     margin-top: 5px;
@@ -64,11 +84,10 @@ select:focus {
 .actions {
     display: flex;
     gap: 10px;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
-button,
-.cancel-btn {
+.btn {
     flex: 1;
     padding: 10px;
     text-align: center;
@@ -79,21 +98,20 @@ button,
     font-size: 15px;
 }
 
-button {
+button.btn {
     background: #2c7be5;
     color: white;
 }
 
-button:hover {
+button.btn:hover {
     background: #1a68d1;
 }
 
-.cancel-btn {
+.btn-secondary {
     background: #6c757d;
     color: white;
 }
 
-.cancel-btn:hover {
+.btn-secondary:hover {
     background: #5a6268;
 }
-

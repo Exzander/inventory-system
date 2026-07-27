@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class RegisterUserServlet extends HttpServlet {
-
     private final UserRepository userRepository = ObjectFactory.getUserRepository();
 
     @Override
@@ -24,7 +23,6 @@ public class RegisterUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String role = req.getParameter("role");

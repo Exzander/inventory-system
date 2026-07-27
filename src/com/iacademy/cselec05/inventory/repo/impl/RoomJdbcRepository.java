@@ -74,7 +74,7 @@ public class RoomJdbcRepository implements RoomRepository {
 
     @Override
     public List<Room> findAll() {
-        String sql = "SELECT room_id, room_name FROM room";
+        String sql = "SELECT room_id, room_name FROM room ORDER BY room_id ASC";
 
         List<Room> rooms = new ArrayList<>();
 
@@ -89,7 +89,6 @@ public class RoomJdbcRepository implements RoomRepository {
 
                 rooms.add(room);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

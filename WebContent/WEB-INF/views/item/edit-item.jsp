@@ -60,6 +60,7 @@
                     <button type="submit">Update Item</button>
                     <a class="cancel-btn" href="${pageContext.request.contextPath}/item-list">Cancel</a>
                 </div>
+
             </form>
         </c:if>
     </div>

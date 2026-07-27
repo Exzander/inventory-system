@@ -13,7 +13,6 @@
         <h2>Create Room</h2>
 
         <form action="${pageContext.request.contextPath}/create-room" method="post">
-
             <div class="form-group">
                 <label for="roomName">Room Name</label>
                 <input type="text" id="roomName" name="roomName" value="${roomName}">
@@ -23,7 +22,6 @@
                             ${roomError}
                     </div>
                 </c:if>
-
             </div>
 
             <div class="actions">

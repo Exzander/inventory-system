@@ -24,7 +24,6 @@ public class ManageStockServlet extends HttpServlet {
 
         try {
             int id = Integer.parseInt(idStr);
-
             Item item = itemRepository.findById(id);
 
             if (item == null) {

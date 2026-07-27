@@ -49,7 +49,7 @@
 
             <div class="actions">
                 <button type="submit">Create Item</button>
-                <a href="${pageContext.request.contextPath}/item-list">Cancel</a>
+                <a class="cancel-btn" href="${pageContext.request.contextPath}/home">Cancel</a>
             </div>
 
         </form>

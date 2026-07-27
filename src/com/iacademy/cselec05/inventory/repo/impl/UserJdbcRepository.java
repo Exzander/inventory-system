@@ -10,9 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserJdbcRepository implements UserRepository {
+
     @Override
     public User findByCredentials(String username, String password) {
-
         String sql = "SELECT user_id, username, password, user_role FROM `user` WHERE username = ? AND password = ?";
 
         // Auto closes JDBC resources
@@ -54,7 +54,6 @@ public class UserJdbcRepository implements UserRepository {
 
             // Determine whether a row (new user account) has been successfully inserted in the database
             return ps.executeUpdate() > 0;
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

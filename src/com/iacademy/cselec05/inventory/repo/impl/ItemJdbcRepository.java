@@ -12,7 +12,6 @@ public class ItemJdbcRepository implements ItemRepository {
 
     @Override
     public boolean createItem(Item item) {
-
         String sql = "INSERT INTO item (item_name, quantity, room_id) VALUES (?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
@@ -28,7 +27,6 @@ public class ItemJdbcRepository implements ItemRepository {
             }
 
             return ps.executeUpdate() > 0;
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -39,7 +37,6 @@ public class ItemJdbcRepository implements ItemRepository {
 
     @Override
     public boolean updateItem(Item item) {
-
         String sql = "UPDATE item SET item_name = ?, quantity = ?, room_id = ? WHERE item_id = ?";
 
         try (Connection conn = DBConnection.getConnection();
@@ -57,7 +54,6 @@ public class ItemJdbcRepository implements ItemRepository {
             ps.setInt(4, item.getId());
 
             return ps.executeUpdate() > 0;
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -67,7 +63,6 @@ public class ItemJdbcRepository implements ItemRepository {
 
     @Override
     public boolean updateQuantity(int itemId, int quantity) {
-
         String sql = "UPDATE item SET quantity = ? WHERE item_id = ?";
 
         try (Connection conn = DBConnection.getConnection();
@@ -77,7 +72,6 @@ public class ItemJdbcRepository implements ItemRepository {
             ps.setInt(2, itemId);
 
             return ps.executeUpdate() > 0;
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -87,7 +81,6 @@ public class ItemJdbcRepository implements ItemRepository {
 
     @Override
     public Item findById(int id) {
-
         String sql = "SELECT i.item_id, i.item_name, i.quantity, i.room_id, r.room_name FROM item i LEFT JOIN room r ON i.room_id = r.room_id WHERE i.item_id = ?";
 
         try (Connection conn = DBConnection.getConnection();
@@ -118,7 +111,6 @@ public class ItemJdbcRepository implements ItemRepository {
                     return item;
                 }
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -128,10 +120,9 @@ public class ItemJdbcRepository implements ItemRepository {
 
     @Override
     public List<Item> findAll() {
-
         List<Item> items = new ArrayList<>();
 
-        String sql = "SELECT i.item_id, i.item_name, i.quantity, i.room_id, r.room_name FROM item i LEFT JOIN room r ON i.room_id = r.room_id";
+        String sql = "SELECT i.item_id, i.item_name, i.quantity, i.room_id, r.room_name FROM item i LEFT JOIN room r ON i.room_id = r.room_id ORDER BY i.item_id ASC";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
@@ -157,7 +148,6 @@ public class ItemJdbcRepository implements ItemRepository {
 
                 items.add(item);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

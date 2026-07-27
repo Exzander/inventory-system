@@ -8,9 +8,10 @@ import com.iacademy.cselec05.inventory.repo.impl.RoomJdbcRepository;
 import com.iacademy.cselec05.inventory.repo.impl.UserJdbcRepository;
 
 public class ObjectFactory {
-
     private static final UserRepository USER_REPOSITORY = new UserJdbcRepository();
+
     private static final RoomRepository ROOM_REPOSITORY = new RoomJdbcRepository();
+
     private static final ItemRepository ITEM_REPOSITORY = new ItemJdbcRepository();
 
     public static UserRepository getUserRepository() {

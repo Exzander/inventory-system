@@ -46,7 +46,6 @@
 
                 <div class="form-group">
                     <label for="quantity">Quantity</label>
-
                     <input type="number" id="quantity" name="quantity" min="1" value="${quantity}">
 
                     <c:if test="${not empty quantityError}">
@@ -60,6 +59,7 @@
                     <button type="submit">Update Quantity</button>
                     <a class="cancel-btn" href="${pageContext.request.contextPath}/item-list">Cancel</a>
                 </div>
+
             </form>
         </c:if>
     </div>

@@ -32,7 +32,6 @@ public class AuthenticationFilter implements Filter {
         } else { // If all are false, deny the request and redirect them to the login page
             resp.sendRedirect(req.getContextPath() + "/login");
         }
-
     }
 
     @Override

@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/item/item-list.css">
 </head>
 <body>
-    <div class="container">
 
+<div class="container">
         <div class="top-bar">
             <h2>Inventory Items</h2>
 
