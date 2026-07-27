@@ -13,7 +13,7 @@ public class UserJdbcRepository implements UserRepository {
     @Override
     public User findByCredentials(String username, String password) {
 
-        String sql = "SELECT id, username, password, role FROM user WHERE username = ? AND password = ?";
+        String sql = "SELECT user_id, username, password, user_role FROM `user` WHERE username = ? AND password = ?";
 
         // Auto closes JDBC resources
         try(Connection conn = DBConnection.getConnection();
@@ -25,10 +25,10 @@ public class UserJdbcRepository implements UserRepository {
             try(ResultSet rs = ps.executeQuery()) {
                 if(rs.next()) {
                     User user = new User();
-                    user.setId(rs.getInt("id"));
+                    user.setId(rs.getInt("user_id"));
                     user.setUsername(rs.getString("username"));
                     user.setPassword(rs.getString("password"));
-                    user.setRole(rs.getString("role"));
+                    user.setRole(rs.getString("user_role"));
 
                     return user;
                 }
@@ -43,7 +43,7 @@ public class UserJdbcRepository implements UserRepository {
     @Override
     public boolean registerUser(User user) {
 
-        String sql = "INSERT INTO user (username, password, role) VALUES (?,?,?)";
+        String sql = "INSERT INTO `user` (username, password, user_role) VALUES (?,?,?)";
 
         try(Connection conn = DBConnection.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql)) {

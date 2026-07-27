@@ -5,31 +5,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory System Home</title>
+    <title>Inventory System</title>
 </head>
 <body>
+<div class="Main-Container">
+    <h1>Welcome <c:out value="${currentUser.username}"/></h1>
+
+    <div class="Room-List">
+        <h3>Display Rooms</h3>
+        <a href="${pageContext.request.contextPath}/room-list">View Rooms</a>
+    </div>
+
+    <div class="Item-List">
+        <h3>View Items</h3>
+        <a href="${pageContext.request.contextPath}/item-list">
+            View Items
+        </a>
+    </div>
 
 
-    <h2>Welcome ${username}</h2>
+    <%--    Admin Feature    --%>
+    <c:if test="${currentUser.role == 'ADMIN'}" >
+        <div class="Registration-Container">
+            <h3>Register New User</h3>
+            <a href="${pageContext.request.contextPath}/register">Register User</a>
+        </div>
 
-    <h3>Inventory Items</h3><br>
-    <a href="${pageContext.request.contextPath}/items">View Items</a><br><br>
+        <div class="Create-Room">
+            <h3>Create Room</h3>
+            <a href="${pageContext.request.contextPath}/create-room">Create Room</a>
+        </div>
 
-    <!-- Clerk / Admin Features -->
-    <c:if test="${currentUser.role eq 'Clerk' || currentUser.role eq 'Admin'}">
-        <h3>Manage Stock Levels</h3><br>
-        <a href="${pageContext.request.contextPath}/items/stock">Update Stock</a><br><br>
+        <div class="Create-Item">
+            <h3>Create Item</h3>
+            <a href="${pageContext.request.contextPath}/create-item">Create Item</a>
+        </div>
+
     </c:if>
 
-    <!-- Admin Exclusive Features -->
-    <c:if test="${currentUser.role eq 'Admin'}">
-        <h3>Manage Rooms</h3><br>
-        <a href="${pageContext.request.contextPath}/rooms/manage">Manage Rooms</a><br><br>
-
-        <h3>Register New User</h3><br>
-        <a href="${pageContext.request.contextPath}/register">Register User</a><br><br>
+    <!-- CLERK FEATURES -->
+    <c:if test="${currentUser.role == 'CLERK' || currentUser.role == 'ADMIN'}">
+        <div class="Stock-Management">
+            <h3>Update Item Stock</h3>
+            <a href="${pageContext.request.contextPath}/manage-stock">Add / Subtract Quantity</a>
+        </div>
     </c:if>
 
     <a href="${pageContext.request.contextPath}/logout">Logout</a>
+</div>
 </body>
 </html>

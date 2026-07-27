@@ -13,11 +13,11 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        // 2. Retrieve user object and set it as a request attribute for the JSP View
+        // Retrieve user object and set it as a request attribute for the JSP View
         User currentUser = AuthUtility.getUser(req);
         req.setAttribute("currentUser", currentUser);
 
-        // 3. Forward request to protected dashboard view inside WEB-INF
+        // Forward request to protected dashboard view inside WEB-INF
         req.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(req, resp);
     }
 }

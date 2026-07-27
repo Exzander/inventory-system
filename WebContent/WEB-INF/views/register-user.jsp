@@ -23,9 +23,9 @@
         <label for="role">Role</label><br>
         <select id="role" name="role">
             <option value="">-- Select Role --</option>
-            <option value="Registered User" <%= "Registered User".equals(request.getAttribute("role")) ? "selected" : "" %>>Registered User</option>
-            <option value="Clerk" <%= "Clerk".equals(request.getAttribute("role")) ? "selected" : "" %>>Clerk</option>
-            <option value="Admin" <%= "Admin".equals(request.getAttribute("role")) ? "selected" : "" %>>Admin</option>
+            <option value="REGISTERED_USER" <%= "REGISTERED_USER".equals(request.getAttribute("role")) ? "selected" : "" %>>Registered User</option>
+            <option value="CLERK" <%= "CLERK".equals(request.getAttribute("role")) ? "selected" : "" %>>Clerk</option>
+            <option value="ADMIN" <%= "ADMIN".equals(request.getAttribute("role")) ? "selected" : "" %>>Admin</option>
         </select><br><br>
 
 

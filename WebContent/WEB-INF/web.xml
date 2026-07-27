@@ -32,6 +32,16 @@
         <url-pattern>/register</url-pattern>
     </filter-mapping>
 
+    <filter-mapping>
+        <filter-name>AuthorizationFilter</filter-name>
+        <url-pattern>/create-room</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>AuthorizationFilter</filter-name>
+        <url-pattern>/edit-room</url-pattern>
+    </filter-mapping>
+
     <!--  Servlets  -->
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
@@ -51,6 +61,21 @@
     <servlet>
         <servlet-name>RegisterUserServlet</servlet-name>
         <servlet-class>com.iacademy.cselec05.inventory.servlet.RegisterUserServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>CreateRoomServlet</servlet-name>
+        <servlet-class>com.iacademy.cselec05.inventory.servlet.CreateRoomServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>EditRoomServlet</servlet-name>
+        <servlet-class>com.iacademy.cselec05.inventory.servlet.EditRoomServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>RoomListServlet</servlet-name>
+        <servlet-class>com.iacademy.cselec05.inventory.servlet.RoomListServlet</servlet-class>
     </servlet>
 
     <!--  Servlet Mapping  -->
@@ -73,5 +98,20 @@
         <servlet-name>RegisterUserServlet</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
-    
+
+    <servlet-mapping>
+        <servlet-name>CreateRoomServlet</servlet-name>
+        <url-pattern>/create-room</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>EditRoomServlet</servlet-name>
+        <url-pattern>/edit-room</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>RoomListServlet</servlet-name>
+        <url-pattern>/room-list</url-pattern>
+    </servlet-mapping>
+
 </web-app>

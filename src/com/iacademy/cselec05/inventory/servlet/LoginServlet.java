@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
            AuthUtility.setSession(user, req);
            resp.sendRedirect(req.getContextPath() + "/home");
        } else {
-           req.setAttribute("error", "Invalid Username or Password");
+           req.setAttribute("error", "Invalid username or password");
            req.getRequestDispatcher("/login.jsp").forward(req, resp);
        }
 
